@@ -1,0 +1,190 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div ng-controller="SelectCtrl" ng-cloak>
+    <div class="jumbotron">
+        <div class="mainLogo">
+            <img src="~/images/logo.png" class="imgResponsive" style="margin-left: auto; margin-right: auto;" alt="FootyPredictor.Org Number one football betting statistical resource" />
+            <h3 style="color: black !important">
+                Football betting. Statistics. Simplified.
+            </h3>
+        </div>
+        <div class="dropdowns">
+            <ui-select ng-model="seasonSelected.selected" theme="selectize" ng-disabled="disabled" style="width: 65%; margin-left: auto; margin-right: auto;" ng-change="updateSeason()">
+                <ui-select-match placeholder="Select a League/Season">{{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="seasonSelected in season | propsFilter: {name: $select.search, numberOfTeams: $select.search, numberOfGames: $select.search, lastUpdated: $select.search}">
+                    <div ng-bind-html="seasonSelected.name | highlight: $select.search"></div>
+                    <small class="selectizeDropdownText">
+                        Number Of Teams: {{seasonSelected.numberOfTeams}} <br />
+                        Number Of Games: {{seasonSelected.numberOfGames}} <br />
+                        Last Updated: {{seasonSelected.lastUpdated | date:'medium'}}<br /><hr style="margin-top: 8px; margin-bottom: 0; border-top: 1px solid #6f6f6f" />
+                    </small>
+                </ui-select-choices>
+            </ui-select>
+            <div id="divSelectTeams" style="display: none;">
+                <ui-select ng-model="teamSelected.selected" theme="selectize" ng-disabled="disabled" style="width: 65%; margin-left: auto; margin-right: auto;" ng-change="updateTeam()">
+                    <ui-select-match placeholder="Select a Team">{{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices repeat="teamSelected in team | propsFilter: {name: $select.search, shortName: $select.search}">
+                        <div ng-bind-html="teamSelected.name | highlight: $select.search"></div>
+                        <small class="selectizeDropdownText">
+                            <img ng-cloak ng-src="{{teamSelected.crestUrl}}" class="crest" alt="" />
+                            Squad Value: {{teamSelected.squadMarketValue}}
+                        </small>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+    <div id="divLeagueDetails" style="display: none;">
+        <div class="row" name="divStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="subHeadings">
+                    <img src="~/images/stats.png" />
+                </div>
+                <div class="rcorners">
+                    <div class="statsChart" id="graphLeaderUnder"></div>
+                    <div class="statsChart" id="graphLeaderOver"></div>
+                    <div class="statsChart" id="graphLeaderLoss"></div>
+                    <div class="statsChart" id="graphLeaderDraw"></div>
+                    <div class="statsChart" id="graphLeaderWin"></div>
+                    <div class="statsDivText">
+                        <img src="~/images/topgreen.png" />
+                    </div>
+                    <div name="statsDiv" class="statsDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{leagueData[0].crestURI}}" class="crest" alt="" /> <span class="altText"><strong>{{leagueData[0].teamName}}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row" name="divStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="rcorners">
+                    <div class="statsChart" id="graphWinsUnder"></div>
+                    <div class="statsChart" id="graphWinsOver"></div>
+                    <div class="statsChart" id="graphWinsLoss"></div>
+                    <div class="statsChart" id="graphWinsDraw"></div>
+                    <div class="statsChart" id="graphWinsWin"></div>
+                    <div class="statsDivText">
+                        <img src="~/images/winsgreen.png" />
+                    </div>
+                    <div name="statsDiv" class="statsDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{mostWins.crestURI}}" class="crest" alt="" /> <span class="altText"><strong>{{mostWins.teamName}}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row" name="divStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="rcorners">
+                    <div class="statsChart" id="graphDrawUnder"></div>
+                    <div class="statsChart" id="graphDrawOver"></div>
+                    <div class="statsChart" id="graphDrawLoss"></div>
+                    <div class="statsChart" id="graphDrawDraw"></div>
+                    <div class="statsChart" id="graphDrawWin"></div>
+                    <div class="statsDivText">
+                        <img src="~/images/drawsgreen.png" />
+                    </div>
+                    <div name="statsDiv" class="statsDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{mostDraw.crestURI}}" class="crest" alt="" /> <span class="altText"><strong>{{mostDraw.teamName}}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row" name="divStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="rcorners">
+                    <div class="statsChart" id="graphLossUnder"></div>
+                    <div class="statsChart" id="graphLossOver"></div>
+                    <div class="statsChart" id="graphLossLoss"></div>
+                    <div class="statsChart" id="graphLossDraw"></div>
+                    <div class="statsChart" id="graphLossWin"></div>
+                    <div class="statsDivText">
+                        <img src="~/images/lostgreen.png" />
+                    </div>
+                    <div name="statsDiv" class="statsDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{mostLoss.crestURI}}" class="crest" alt="" /> <span class="altText"><strong>{{mostLoss.teamName}}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row" name="divStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="rcorners">
+                    <div class="statsChart" id="graphOversUnder"></div>
+                    <div class="statsChart" id="graphOversOver"></div>
+                    <div class="statsChart" id="graphOversLoss"></div>
+                    <div class="statsChart" id="graphOversDraw"></div>
+                    <div class="statsChart" id="graphOversWin"></div>
+                    <div class="statsDivText">
+                        <img src="~/images/oversgreen.png" />
+                    </div>
+                    <div name="statsDiv" class="statsDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{mostOvers.crestURI}}" class="crest" alt="" /> <span class="altText"><strong>{{mostOvers.teamName}}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row" name="divStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="rcorners">
+                    <div class="statsChart" id="graphUndersUnder"></div>
+                    <div class="statsChart" id="graphUndersOver"></div>
+                    <div class="statsChart" id="graphUndersLoss"></div>
+                    <div class="statsChart" id="graphUndersDraw"></div>
+                    <div class="statsChart" id="graphUndersWin"></div>
+                    <div class="statsDivText">
+                        <img src="~/images/undersgreen.png" />
+                    </div>
+                    <div name="statsDiv" class="statsDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{mostUnders.crestURI}}" class="crest" alt="" /> <span class="altText"><strong>{{mostUnders.teamName}}</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="divTeamDetails" style="display: none;">
+        <div class="row" name="divTeamStats" style="display: none;">
+            <div class="col-md-12">
+                <div class="subHeadings">
+                    <img src="~/images/stats.png" />
+                </div>
+                <div class="rcornersTeam">
+                    <div name="statsDiv" class="statsTeamDiv" style="display: none;">
+                        <img ng-cloak ng-src="{{teamSelected.selected.crestUrl}}" class="crest" alt="" /> <span class="altText"><strong>{{teamSelected.selected.name}}</strong></span>
+                    </div>
+                    <div class="statsChartCenter" id="graphTeamWin"></div>
+                    <div class="statsChartCenter" id="graphTeamDraw"></div>
+                    <div class="statsChartCenter" id="graphTeamLoss"></div>
+                    <div class="statsChartCenter" id="graphTeamOver"></div>
+                    <div class="statsChartCenter" id="graphTeamUnder"></div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+    <br />
+    <div class="row" id="divLeague" style="display: none;">
+        <div class="col-md-12">
+            <div class="subHeadings">
+                <img src="~/images/league.png" />
+            </div>
+            <div id="gridLeague" ui-grid="gridOptionsLeague" ui-grid-cellNav ui-grid-edit ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping class="gridLeague"></div>
+        </div>
+    </div>
+    <br />
+    <div class="row" id="divFixturesList" style="display: none;">
+        <div class="col-md-12">
+            <div class="subHeadings">
+                <img src="~/images/fixandresults.png" />
+            </div>
+            <div id="gridFixturesList" ui-grid="gridOptionsFixtureList" ui-grid-cellNav ui-grid-edit ui-grid-resize-columns ui-grid-pinning ui-grid-selection ui-grid-move-columns ui-grid-importer ui-grid-exporter ui-grid-grouping class="gridFixtures"></div>
+        </div>
+    </div>
+</div>
+

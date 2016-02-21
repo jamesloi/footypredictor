@@ -1,0 +1,219 @@
+﻿[ng\:cloak],[ng-cloak],.ng-cloak{display:none !important}
+
+body {
+    font-family: "Righteous", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: url("../images/pitch.jpg");
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed;
+    background-color: #3D820F;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+html, body{height:100%;}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Righteous", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Set padding to display errors that occur during databinding */
+.padding-error {
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .nofloat {
+        float: none;
+        padding: 10px 15px;
+    }
+}
+
+
+.vsLogo {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.mainLogo {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.selectize-control > .selectize-dropdown {
+    top: 36px;
+    width:100%;
+}
+
+.selectize-dropdown, .selectize-input, .selectize-input input {
+    font-family: "Russo One", Helvetica, Arial, sans-serif !important;
+    font-size: 16px !important;
+}
+
+.selectize-dropdown-content {
+    max-height: 400px !important;
+}
+
+.selectizeDropdownText {
+    font-family: Helvetica, Arial, sans-serif !important;
+    font-weight: bold;
+}
+
+.dropdowns {
+    width: 100%;
+}
+
+.crest {
+    width: 50px;
+    height: 50px;
+}
+
+.gridFixtures {
+    width: 855px;
+    background-color: white;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gridLeague{
+    width: 1160px;
+    background-color: white;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.home {
+    background-color: #D3EBF2 !important;
+}
+
+.away {
+    background-color: #FADCF2 !important;
+}
+
+.points {
+    background-color: #D3F2E5 !important;
+}
+
+.subHeadings {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.altText {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
+.rcorners {
+    border-radius: 15px 50px;
+    background: #BAF7D6;    
+    width: 100%; 
+    overflow:auto;
+    padding-right: 100px;
+}
+
+.statsDiv {
+    float: right;
+    font-size: 1.4em;
+    margin-right: 20px;
+    overflow: hidden;
+
+}
+
+.statsChart {
+    float: right;
+    width: 110px;
+    height: 110px;
+    overflow:hidden;
+}
+
+.statsDivText {
+    float: left;
+    font-size: 1.4em;
+    width: 40%;
+    margin-left: 20px;
+}
+
+.statsTeamDiv {
+    display: inline-block;
+    font-size: 1.4em;
+    margin-right: 20px;
+    line-height: 110px;
+    height: 110px;
+    overflow:hidden; 
+}
+
+.rcornersTeam {
+    border-radius: 15px 50px;
+    background: #BAF7D6;    
+    width: 100%; 
+    overflow:auto;
+    text-align: center;
+}
+
+.statsChartCenter {
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    overflow:hidden;    
+}
+
+.jumbotron{
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: inherit;
+    background-color:inherit;
+    padding-bottom:0px;
+}
+
+.imgResponsive {
+    max-width: 100%;
+    height: auto;
+}
+
+@media only screen and (max-width: 780px) {
+.statsDiv {
+    float: right;
+    font-size: 1.4em;
+    margin-right: 20px;
+    overflow: hidden;
+    width:100%;
+    padding-left: 50px;
+    padding-bottom: 10px;
+}
+.rcorners {
+    border-radius: 15px 50px;
+    background: #BAF7D6;    
+    width: 100%; 
+    overflow:auto;
+    padding:0;
+}
+}

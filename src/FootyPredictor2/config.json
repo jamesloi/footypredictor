@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "FootyPredictor2"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-FootyPredictor2-eb267eee-3410-4a8c-9ec9-93b3078a91ce;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
